@@ -1,327 +1,524 @@
-# LinkedIn AI Auto Job Applier 🤖
-This is an web scraping bot that automates the process of job applications on LinkedIn. It searches for jobs relevant to you, answers all questions in application form, customizes your resume based on the collected job information, such as skills required, description, about company, etc. and applies to the job. Can apply 100+ jobs in less than 1 hour. 
+# 🤖 AI Auto Job Applier - LinkedIn
 
+> **Automate Your Job Search:** Apply to 100+ LinkedIn jobs in less than 1 hour with AI-powered resume customization
 
-## 📽️ See it in Action
-[![Auto Job Applier demo video](https://github.com/GodsScion/Auto_job_applier_linkedIn/assets/100998531/429f7753-ebb0-499b-bc5e-5b4ee28c4f69)](https://youtu.be/gMbB1fWZDHw)
-Click on above image to watch the demo or use this link https://youtu.be/gMbB1fWZDHw
-
-
-## ✨ Content
-- [Introduction](#linkedin-ai-auto-job-applier-)
-- [Demo Video](#%EF%B8%8F-see-it-in-action)
-- [Index](#-content)
-- [Install](#%EF%B8%8F-how-to-install)
-- [Configure](#-how-to-configure)
-- [Contributor Guidelines](#‍-contributor-guidelines)
-- [Updates](%EF%B8%8F-major-updates-history)
-- [Disclaimer](#-disclaimer)
-- [Terms and Conditions](#%EF%B8%8F-terms-and-conditions)
-- [License](#%EF%B8%8F-license)
-- [Socials](#-socials)
-- [Support and Discussions](#-community-support-and-discussions)
-
-<br>
-
-## ⚙️ How to install
-
-[![Auto Job Applier setup tutorial video](https://github.com/user-attachments/assets/9e876187-ed3e-4fbf-bd87-4acc145880a2)](https://youtu.be/f9rdz74e1lM?si=4fRBcte0nuvr6tEH)
-Click on above image to watch the tutorial for installation and configuration or use this link https://youtu.be/f9rdz74e1lM (Recommended to watch it in 2x speed)
-
-1. [Python 3.10](https://www.python.org/) or above. Visit https://www.python.org/downloads/ to download and install Python, or for windows you could visit Microsoft Store and search for "Python". **Please make sure Python is added to Path in System Environment Variables**.
-2. Install necessary [Undetected Chromedriver](https://pypi.org/project/undetected-chromedriver/), [PyAutoGUI](https://pypi.org/project/PyAutoGUI/) and [Setuptools](https://pypi.org/project/setuptools/) packages. After Python is installed, OPEN a console/terminal or shell, Use below command that uses the [pip](https://pip.pypa.io/en/stable) command-line tool to install these 3 package.
-  ```
-  pip install undetected-chromedriver pyautogui setuptools openai flask-cors flask
-  ```
-3. Download and install latest version of [Google Chrome](https://www.google.com/chrome) in it's default location, visit https://www.google.com/chrome to download it's installer.
-4. Clone the current git repo or download it as a zip file, url to the latest update https://github.com/GodsScion/Auto_job_applier_linkedIn.
-5. (Not needed if you set `stealth_mode = True` in `config/settings.py` ) Download and install the appropriate [Chrome Driver](https://googlechromelabs.github.io/chrome-for-testing/) for Google Chrome and paste it in the location Chrome was installed, visit https://googlechromelabs.github.io/chrome-for-testing/ to download.
-  <br> <br>
-  ***OR*** 
-  <br> <br>
-  If you are using Windows, click on `windows-setup.bat` available in the `/setup` folder, this will install the latest chromedriver automatically.
-6. If you have questions or need help setting it up or to talk in general, join the github server: https://discord.gg/fFp7uUzWCY
-
-[back to index](#-content)
-
-<br>
-
-## 🔧 How to configure
-1. Open `personals.py` file in `/config` folder and enter your details like name, phone number, address, etc. Whatever you want to fill in your applications.
-2. Open `questions.py` file in `/config` folder and enter your answers for application questions, configure wether you want the bot to pause before submission or pause if it can't answer unknown questions.
-3. Open `search.py` file in `/config` folder and enter your search preferences, job filters, configure the bot as per your needs (these settings decide which jobs to apply for or skip).
-4. Open `secrets.py` file in `/config` folder and enter your LinkedIn username, password to login and OpenAI API Key for generation of job tailored resumes and cover letters (This entire step is optional). If you do not provide username or password or leave them as default, it will login with saved profile in browser, if failed will ask you to login manually.
-5. Open `settings.py` file in `/config` folder to configure the bot settings like, keep screen awake, click intervals (click intervals are randomized to seem like human behavior), run in background, stealth mode (to avoid bot detection), etc. as per your needs.
-6. (Optional) Don't forget to add you default resume in the location you mentioned in `default_resume_path = "all resumes/default/resume.pdf"` given in `/config/questions.py`. If one is not provided, it will use your previous resume submitted in LinkedIn or (In Development) generate custom resume if OpenAI APT key is provided!
-7. Run `runAiBot.py` and see the magic happen.
-8. To run the Applied Jobs history UI, run `app.py` and open web browser on `http://localhost:5000`.
-8. If you have questions or need help setting it up or to talk in general, join the github server: https://discord.gg/fFp7uUzWCY
-
-[back to index](#-content)
-
-<br>
-
-
-## 🧑‍💻 Contributor Guidelines
-Thank you for your efforts and being a part of the community. All contributions are appreciated no matter how small or big. Once you contribute to the code base, your work will be remembered forever.
-
-NOTE: Only Pull request to `community-version` branch will be accepted. Any other requests will be declined by default, especially to main branch.
-Once your code is tested, your changes will be merged to the `main` branch in next cycle.
-
-### Code Guidelines
-  #### Functions:
-  1. All functions or methods are named lower case and snake case
-  2. Must have explanation of their purpose. Write explanation surrounded in `''' Explanation '''` under the definition `def function() -> None:`. Example:
-      ```python
-      def function() -> None:
-        '''
-        This function does nothing, it's just an example for explanation placement!
-        '''
-      ```
-  4. The Types `(str, list, int, list[str], int | float)` for the parameters and returns must be given. Example:
-      ```python
-      def function(param1: str, param2: list[str], param3: int) -> str:
-      ```
-  5. Putting all that together some valid examples for function or method declarations would be as follows.
-      ```python
-      def function_name_in_camel_case(parameter1: driver, parameter2: str) -> list[str] | ValueError:
-        '''
-        This function is an example for code guidelines
-        '''
-        return [parameter2, parameter2.lower()]
-      ```
-  6. The hashtag comments on top of functions are optional, which are intended for developers `# Comments for developers`.
-      ```python
-      # Enter input text function
-      def text_input_by_ID(driver: WebDriver, id: str, value: str, time: float=5.0) -> None | Exception:
-          '''
-          Enters `value` into the input field with the given `id` if found, else throws NotFoundException.
-          - `time` is the max time to wait for the element to be found.
-          '''
-          username_field = WebDriverWait(driver, time).until(EC.presence_of_element_located((By.ID, id)))
-          username_field.send_keys(Keys.CONTROL + "a")
-          username_field.send_keys(value)
-      
-      ```
-   
-  #### Variables
-  1. All variables must start with lower case, must be in explainable full words. If someone reads the variable name, it should be easy to understand what the variable stores.
-  2. All local variables are camel case. Examples:
-      ```python
-      jobListingsElement = None
-      ```
-      ```python
-      localBufferTime = 5.5
-      ```
-  3. All global variables are snake case. Example:
-      ```
-      total_runs = 1
-      ```
-  4. Mentioning types are optional.
-      ```python
-      localBufferTime: float | int = 5.5
-      ```
-  
-  #### Configuration variables
-  1. All config variables are treated as global variables. They have some extra guidelines.
-  2. Must have variable setting explanation, and examples of valid values. Examples:
-      ```python
-      # Explanation of what this setting will do, and instructions to enter it correctly
-      config_variable = "value1"    #  <Valid values examples, and NOTES> "value1", "value2", etc. Don't forget quotes ("")
-      ```
-      ```python
-      # Do you want to randomize the search order for search_terms?
-      randomize_search_order = False     # True of False, Note: True or False are case-sensitive
-      ```
-      ```python
-      # Avoid applying to jobs if their required experience is above your current_experience. (Set value as -1 if you want to apply to all ignoring their required experience...)
-      current_experience = 5             # Integers > -2 (Ex: -1, 0, 1, 2, 3, 4...)
-      ```
-      ```python
-      # Search location, this will be filled in "City, state, or zip code" search box. If left empty as "", tool will not fill it.
-      search_location = "United States"               # Some valid examples: "", "United States", "India", "Chicago, Illinois, United States", "90001, Los Angeles, California, United States", "Bengaluru, Karnataka, India", etc.
-
-      ```
-  4. Add the config variable in appropriate `/config/file`.
-  5. Every config variable must be validated. Go to `/modules/validator.py` and add it over there. Example:
-      For config variable `search_location = ""` found in `/config/search.py`, string validation is added in file `/modules/validator.py` under the method `def validate_search()`.
-      ```python
-      def validate_search() -> None | ValueError | TypeError:
-          '''
-          Validates all variables in the `/config/search.py` file.
-          '''
-          check_string(search_location, "search_location")
-      ```
-
-  [back to index](#-content)
-  
-  ### Attestation
-  1. All contributions require proper attestion. Format for attestation:
-  ```python
-  ##> ------ <Your full name> : <github id> OR <email> - <Type of change> ------
-      print("My contributions 😍") # Your code
-  ##<
-  ```
-  2. Examples for proper attestation:
-  New feature example
-  ```python
-  ##> ------ Sai Vignesh Golla : godsscion - Feature ------
-  def alert_box(title: str, message: str) -> None:
-    '''
-    Shows an alert box with the given `title` and `message`.
-    '''
-    from pyautogui import alert
-    return alert(title, message)
-
-  ##<
-  ```
-  
-  Bug fix example
-  ```python
-  def alert_box(title: str, message: str) -> None:
-    '''
-    Shows an alert box with the given `title` and `message`.
-    '''
-    from pyautogui import alert
-
-  ##> ------ Sai Vignesh Golla : saivigneshgolla@outlook.com - Bug fix ------
-    return alert(message, title)
-  ##<
-  ```
-
-[back to index](#-content)
-
-## 🗓️ Major Updates History:
-### Jan 20, 2026
-- You can now simultaneously use chrome, while bot continues applying in a new window
-
-### Jul 20, 2024
-- Contributions from community have been added
-- Better AI support, minor bug fixes
-
-### Nov 28, 2024
-- Patched to work for latest changes in Linkedin.
-- Users can now select to follow or not follow companies when submitting application.
-- Frameworks for future AI Developments have been added.
-- AI can now be used to extract skills from job description. 
-
-### Oct 16, 2024
-- Framework for OpenAI API and Local LLMs
-- Framework for RAG
-
-### Sep 09, 2024
-- Smarter Auto-fill for salaries and notice periods
-- Robust Search location filter, will work in window mode (No need for full screen)
-- Better logic for Select and Radio type questions
-- Proper functioning of Decline to answer questions in Equal Employment opportunity questions
-- Checkbox questions select fail bug fixed
-- Annotations are clearer in instructions for setup
-
-### Sep 07, 2024
-- Annotations for developers
-- Robust input validations
-- Restructured config file
-- Fixed pagination bug
-
-### Aug 21, 2024
-- Performance improvements (skip clicking on applied jobs and blacklisted companies)
-- Stop when easy apply application limit is reached
-- Added ability to discard from pause at submission dialogue box
-- Added support for address input
-- Bug fixed radio questions, added support for physical disability questions
-- Added framework for future config file updates
-
-### June 19, 2024
-- Major Bug fixes (Text Area type questions)
-- Made uploading default resume as not required
-
-### May 15, 2024
-- Added functionality for textarea type questions `summary`, `cover_letter`(Summary, Cover letter); checkbox type questions (acknowledgements)
-- Added feature to skip irrelevant jobs based on `bad_words` 
-- Improved performance for answering questions
-- Logic change for masters students skipping
-- Change variable names `blacklist_exceptions` -> `about_company_good_words` and `blacklist_words` -> `about_company_bad_words`
-- Added session summary for logs
-- Added option to turn off "Pause before Submit" until next run
-
-### May 05, 2024
-- For questions similar to "What is your current location?", City posted in Job description will be posted as the answer if `current_city` is left empty in the configuration
-- Added option to over write previously saved answers for a question `overwrite_previous_answers`
-- Tool will now save previous answer of a question
-- Tool will now collect all available options for a Radio type or Select type question
-- Major update in answering logic for Easy Apply Application questions
-- Added Safe mode option for quick stable launches `safe_mode`
-
-### May 04, 2024
-- Added option to fill in "City, state, or zip code" search box `search_location`
-- Bug fixes in answering City or location question
-
-
-[back to index](#-content)
-
-<br>
-
-## 📜 Disclaimer
-
-**This program is for educational purposes only. By downloading, using, copying, replicating, or interacting with this program or its code, you acknowledge and agree to abide by all the Terms, Conditions, Policies, and Licenses mentioned, which are subject to modification without prior notice. The responsibility of staying informed of any changes or updates bears upon yourself. For the latest Terms & Conditions, Licenses, or Policies, please refer to [Auto Job Applier](https://github.com/GodsScion/Auto_job_applier_linkedIn). Additionally, kindly adhere to and comply with LinkedIn's terms of service and policies pertaining to web scraping. Usage is at your own risk. The creators and contributors of this program emphasize that they bear no responsibility or liability for any misuse, damages, or legal consequences resulting from its usage.**
-
-
-## 🏛️ Terms and Conditions
-
-Please consider the following:
-
-- **LinkedIn Policies**: LinkedIn has specific policies regarding web scraping and data collection. The responsibility to review and comply with these policies before engaging, interacting, or undertaking any actions with this program bears upon yourself. Be aware of the limitations and restrictions imposed by LinkedIn to avoid any potential violation(s).
-
-- **No Warranties or Guarantees**: This program is provided as-is, without any warranties or guarantees of any kind. The accuracy, reliability, and effectiveness of the program cannot be guaranteed. Use it at your own risk.
-
-- **Disclaimer of Liability**: The creators and contributors of this program shall not be held responsible or liable for any damages or consequences arising from the direct or indirect use, interaction, or actions performed with this program. This includes but is not limited to any legal issues, loss of data, or other damages incurred.
-
-- **Use at Your Own Risk**: It is important to exercise caution and ensure that your usage, interactions, and actions with this program comply with the applicable laws and regulations. Understand the potential risks and consequences associated with web scraping and data collection activities.
-
-- **Chrome Driver**: This program utilizes the Chrome Driver for web scraping. Please review and comply with the terms and conditions specified for [Chrome Driver](https://chromedriver.chromium.org/home).
-
-
-## ⚖️ License
-
-Copyright (C) 2024 Sai Vignesh Golla  <saivigneshgolla@outlook.com>
-
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
-
-You should have received a copy of the GNU Affero General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
-
-See [AGPLv3 LICENSE](LICENSE) for more info.
-
-
-<br>
-
-[back to index](#-content)
-
-<br>
-
-## 🐧 Socials
-- **LinkedIn** : https://www.linkedin.com/in/saivigneshgolla/
-- **Email**    : saivigneshgolla@outlook.com
-- **X/Twitter**: https://x.com/saivigneshgolla
-- **Discord**  : godsscion
-
-
-## 🙌 Community Support and Discussions
-- **Discord Server** : https://discord.gg/fFp7uUzWCY
-alternate link: https://discord.gg/ykfDjRFB
-- **GitHub**
-    - [All Discussions](https://github.com/GodsScion/Auto_job_applier_linkedIn/discussions)
-    - [Announcements](https://github.com/GodsScion/Auto_job_applier_linkedIn/discussions/categories/announcements)
-    - [General](https://github.com/GodsScion/Auto_job_applier_linkedIn/discussions/categories/general)
-    - [Feature requests or Ideas](https://github.com/GodsScion/Auto_job_applier_linkedIn/discussions/categories/feature-requests-or-ideas)
-    - [Polls](https://github.com/GodsScion/Auto_job_applier_linkedIn/discussions/categories/polls)
-    - [Community Flex](https://github.com/GodsScion/Auto_job_applier_linkedIn/discussions/categories/community-flex)
-    - [Support Q&A](https://github.com/GodsScion/Auto_job_applier_linkedIn/discussions/categories/support-q-a)
-
-
-#### ℹ️ Version: 26.01.20.5.08
+[![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/github/license/rish0000-dot/Auto-Job-Clicker?style=flat-square)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=flat-square)](https://github.com/rish0000-dot/Auto-Job-Clicker/pulls)
 
 ---
 
-[back to the top](#linkedin-ai-auto-job-applier-)
+## 📋 Table of Contents
+
+- [Features](#-features)
+- [Demo](#-demo)
+- [Quick Start](#-quick-start)
+- [Installation](#%EF%B8%8F-installation)
+- [Configuration](#-configuration)
+- [Usage](#-usage)
+- [Project Structure](#-project-structure)
+- [AI Models Supported](#-ai-models-supported)
+- [Troubleshooting](#-troubleshooting)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Support](#-support)
+
+---
+
+## ✨ Features
+
+✅ **Intelligent Job Search** - Automatically searches LinkedIn for jobs matching your criteria
+✅ **AI-Powered Resume Customization** - Tailors your resume for each position using AI
+✅ **Form Auto-Fill** - Automatically answers application questions
+✅ **Batch Processing** - Apply to 100+ jobs per hour
+✅ **Multi-AI Support** - Supports OpenAI ChatGPT, Google Gemini, and DeepSeek
+✅ **Application History** - Tracks all applications with a web dashboard
+✅ **Skill Extraction** - Automatically extracts required skills from job postings
+✅ **Resume Generation** - Dynamically generates customized resumes
+✅ **Company Information** - Gathers company details for context-aware applications
+✅ **Web Dashboard** - View application history and statistics
+
+---
+
+## 📹 Demo
+
+Watch the bot in action:
+
+[![Auto Job Applier Demo](https://img.youtube.com/vi/gMbB1fWZDHw/maxresdefault.jpg)](https://youtu.be/gMbB1fWZDHw)
+**[Click to Watch Full Demo →](https://youtu.be/gMbB1fWZDHw)**
+
+**Setup Tutorial:** [Installation & Configuration Guide](https://youtu.be/f9rdz74e1lM)
+
+
+---
+
+## 🚀 Quick Start
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/rish0000-dot/Auto-Job-Clicker.git
+cd Auto-Job-Clicker/Auto_job_applier_linkedIn-main
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Configure your details
+# Edit config/personals.py with your information
+
+# 4. Run the bot
+python app.py
+```
+
+---
+
+## ⚙️ Installation
+
+### Prerequisites
+
+- **Python 3.10+** - [Download Here](https://www.python.org/downloads/)
+- **Google Chrome** - [Download Here](https://www.google.com/chrome)
+- **Internet Connection**
+
+### Step-by-Step Installation
+
+#### Step 1: Install Python
+```bash
+# Verify Python installation
+python --version
+# Output should be: Python 3.10.x or higher
+```
+⚠️ **Important:** Add Python to your system PATH during installation
+
+#### Step 2: Install Required Packages
+```bash
+pip install -r requirements.txt
+```
+
+Required packages:
+- `undetected-chromedriver` - Prevent LinkedIn detection
+- `pyautogui` - GUI automation
+- `openai` - ChatGPT integration
+- `flask` & `flask-cors` - Web server for dashboard
+- `setuptools` - Build tools
+
+#### Step 3: Install ChromeDriver
+**For Windows:**
+```bash
+# Run the automatic setup script
+cd setup
+windows-setup.bat
+```
+
+**For macOS/Linux:**
+```bash
+bash setup.sh
+```
+
+**Manual Installation:**
+1. Download [Chrome Driver](https://googlechromelabs.github.io/chrome-for-testing/) matching your Chrome version
+2. Place it in your Chrome installation directory
+
+#### Step 4: Clone Repository
+```bash
+git clone https://github.com/rish0000-dot/Auto-Job-Clicker.git
+cd Auto-Job-Clicker/Auto_job_applier_linkedIn-main
+```
+
+---
+
+## 🔧 Configuration
+
+### 1. Personal Information (`config/personals.py`)
+```python
+# Enter your details
+FIRST_NAME = "Your Name"
+LAST_NAME = "Your Last Name"
+EMAIL = "your.email@example.com"
+PHONE = "+1 (555) 000-0000"
+ADDRESS = "City, State"
+COUNTRY = "United States"
+```
+
+### 2. Job Search Settings (`config/search.py`)
+```python
+# Customize your job search
+KEYWORDS = ["Python Developer", "Data Scientist", "Full Stack Engineer"]
+LOCATION = "United States"
+EXPERIENCE_LEVEL = ["Entry level", "Mid-Senior"]
+DISTANCE = "50 miles"  # or "anywhere"
+JOB_TYPES = ["Full-time", "Contract"]
+```
+
+### 3. Application Questions (`config/questions.py`)
+```python
+# Pre-answer common questions
+ANSWERS = {
+    "Are you legally authorized to work?": "Yes",
+    "Willing to relocate?": "No",
+    # Add your custom answers
+}
+```
+
+### 4. Resume (`config/resume.py`)
+```python
+# Your base resume data
+BASE_RESUME = """
+Your resume content in plain text format
+"""
+```
+
+### 5. AI Provider Settings (`config/settings.py`)
+```python
+# Choose your AI provider
+AI_PROVIDER = "openai"  # Options: "openai", "gemini", "deepseek"
+STEALTH_MODE = True  # Avoid LinkedIn detection
+MAX_APPLICATIONS = 100
+APPLICATION_DELAY = 2  # Seconds between applications
+```
+
+### 6. API Keys (`config/secrets.py`)
+```python
+# Add your API credentials (DO NOT COMMIT THIS FILE)
+OPENAI_API_KEY = "sk-xxxxxxxxxxxxxxx"
+GEMINI_API_KEY = "xxxxxxxxxxxxxxx"
+DEEPSEEK_API_KEY = "xxxxxxxxxxxxxxx"
+
+# LinkedIn credentials
+LINKEDIN_EMAIL = "your.email@example.com"
+LINKEDIN_PASSWORD = "your_password"
+```
+
+⚠️ **Security Warning:** Never commit `secrets.py` to version control. Add it to `.gitignore`.
+
+---
+
+## 🎮 Usage
+
+### Start the Bot
+```bash
+# Navigate to project directory
+cd Auto_job_applier_linkedIn-main
+
+# Run the main application
+python app.py
+```
+
+### Monitor Applications
+Open your browser and go to:
+```
+http://localhost:5000
+```
+
+View your application history, success rate, and statistics.
+
+### Run Background Bot
+```bash
+# Start bot in the background (applies jobs continuously)
+python runAiBot.py
+```
+
+---
+
+## 📁 Project Structure
+
+```
+Auto-Job-Clicker/
+├── Auto_job_applier_linkedIn-main/
+│   ├── app.py                          # Flask web server
+│   ├── runAiBot.py                    # Main automation script
+│   ├── config/                         # Configuration files
+│   │   ├── personals.py               # Personal information
+│   │   ├── search.py                  # Job search parameters
+│   │   ├── questions.py               # Application answers
+│   │   ├── resume.py                  # Resume data
+│   │   ├── settings.py                # Bot settings
+│   │   └── secrets.py                 # API keys (not in repo)
+│   ├── modules/                        # Core functionality
+│   │   ├── clickers_and_finders.py    # Browser automation
+│   │   ├── helpers.py                 # Utility functions
+│   │   ├── open_chrome.py             # Chrome driver setup
+│   │   ├── validator.py               # Input validation
+│   │   ├── ai/                         # AI integrations
+│   │   │   ├── openaiConnections.py
+│   │   │   ├── geminiConnections.py
+│   │   │   ├── deepseekConnections.py
+│   │   │   └── prompts.py             # AI prompts
+│   │   ├── resumes/                    # Resume handling
+│   │   │   ├── extractor.py           # Extract job requirements
+│   │   │   └── generator.py           # Generate customized resumes
+│   │   └── images/                     # UI images and icons
+│   ├── templates/                      # Web dashboard HTML
+│   ├── setup/                          # Installation scripts
+│   │   ├── windows-setup.bat
+│   │   ├── windows-setup.ps1
+│   │   └── setup.sh
+│   └── README.md
+├── LICENSE
+└── .gitignore
+```
+
+---
+
+## 🤖 AI Models Supported
+
+### 1. OpenAI (ChatGPT)
+```python
+AI_PROVIDER = "openai"
+# Requires: OPENAI_API_KEY
+# Models: GPT-4, GPT-3.5 Turbo
+```
+
+### 2. Google Gemini
+```python
+AI_PROVIDER = "gemini"
+# Requires: GEMINI_API_KEY
+# Models: Gemini Pro, Gemini Ultra
+```
+
+### 3. DeepSeek
+```python
+AI_PROVIDER = "deepseek"
+# Requires: DEEPSEEK_API_KEY
+# Models: DeepSeek-V2, DeepSeek-Chat
+```
+
+**Recommendation:** OpenAI (GPT-4) provides the best resume customization results.
+
+---
+
+## 🐛 Troubleshooting
+
+### Issue: "Chrome Driver Not Found"
+```bash
+# Solution 1: Run setup script
+cd setup
+windows-setup.bat  # Windows
+
+# Solution 2: Manual installation
+# Download from: https://googlechromelabs.github.io/chrome-for-testing/
+```
+
+### Issue: "LinkedIn Detected As Bot"
+```python
+# Enable stealth mode in config/settings.py
+STEALTH_MODE = True
+
+# Increase delay between applications
+APPLICATION_DELAY = 3  # seconds
+```
+
+### Issue: "API Key Invalid"
+```bash
+# Check your secrets.py file
+# Verify API keys are correct and have active billing
+# Use quotes around keys: "sk-xxxxxxx"
+```
+
+### Issue: "Port Already in Use (5000)"
+```python
+# Edit app.py to use different port
+app.run(port=5001)
+```
+
+### Issue: "No Applications Found"
+```python
+# Check your search.py settings
+# Verify keywords are correct
+# Check LinkedIn job search criteria manually
+```
+
+### Enable Debug Mode
+```python
+# Add to settings.py
+DEBUG = True
+LOG_LEVEL = "DEBUG"
+```
+
+---
+
+## 📊 Features in Detail
+
+### 📝 Resume Customization
+The bot analyzes job postings and:
+- Extracts required skills
+- Identifies key responsibilities
+- Analyzes company information
+- Customizes your resume to match requirements
+- Maintains ATS (Applicant Tracking System) compatibility
+
+### 📋 Application Tracking
+Track all applications with:
+- Job title and company
+- Application timestamp
+- HR contact information
+- Company profile links
+- Application success status
+
+### 🎯 Smart Job Matching
+- Filter by location, experience level, job type
+- Keyword-based matching
+- Salary range filtering
+- Company exclusion list support
+
+---
+
+## ⚡ Performance Tips
+
+1. **Increase Application Speed**
+   ```python
+   APPLICATION_DELAY = 1  # Reduce delay (minutes)
+   ```
+
+2. **Use CloudFlare DNS**
+   - Speeds up LinkedIn connection
+
+3. **Schedule Batch Applications**
+   ```bash
+   # Run during off-peak hours for better success
+   Python app.py &  # Background process
+   ```
+
+4. **Monitor Resource Usage**
+   - Chrome can use 200-300MB per instance
+   - Limit to 1 browser instance
+
+---
+
+## 🔐 Security
+
+- **Never hardcode credentials** - Use environment variables
+- **Rotate API keys regularly** - Update secrets.py weekly
+- **Keep dependencies updated** - Run `pip install --upgrade -r requirements.txt`
+- **Use strong passwords** - LinkedIn account security is crucial
+- **Enable 2FA** - On your LinkedIn account
+- **Monitor logs** - Check for unusual activity
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+```
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software...
+```
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. **Fork the Repository**
+   ```bash
+   git clone https://github.com/rish0000-dot/Auto-Job-Clicker.git
+   ```
+
+2. **Create Feature Branch**
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+3. **Commit Changes**
+   ```bash
+   git commit -m "Add: Brief description of changes"
+   ```
+
+4. **Push to Branch**
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+5. **Open Pull Request**
+   - Describe your changes clearly
+   - Reference any related issues
+
+### Contribution Guidelines
+- Follow PEP 8 for Python code
+- Add tests for new features
+- Update README for significant changes
+- Keep commits atomic and descriptive
+
+---
+
+## 💬 Support
+
+### Getting Help
+
+- **GitHub Issues** - Report bugs and feature requests
+- **Discord Community** - [Join our Discord](https://discord.gg/fFp7uUzWCY)
+- **Email Support** - Open an issue and we'll respond
+- **FAQ** - Check [Wiki](https://github.com/rish0000-dot/Auto-Job-Clicker/wiki)
+
+### Common Questions
+
+**Q: Is this against LinkedIn's terms?**
+A: This tool respects LinkedIn's rate limits and uses official APIs where available. Use responsibly.
+
+**Q: How many jobs can I apply to per day?**
+A: Typically 50-100+ depending on your system and the complexity of applications.
+
+**Q: What's the success rate?**
+A: Success depends on many factors - your profile, resume match, and application quality.
+
+**Q: Can I use this with LinkedIn Premium?**
+A: Yes, LinkedIn Premium may increase visibility in our targeting options.
+
+---
+
+## 📈 Roadmap
+
+- [ ] Browser extension for easy activation
+- [ ] Machine learning for better job matching
+- [ ] Email notification system
+- [ ] Multi-account support
+- [ ] Advanced analytics dashboard
+- [ ] Mobile app
+
+---
+
+## ⚠️ Disclaimer
+
+This project is provided as-is for educational purposes. Users are responsible for:
+- Ensuring compliance with LinkedIn's Terms of Service
+- Using the bot ethically and responsibly
+- Maintaining accurate and truthful information in applications
+- Respecting LinkedIn's rate limits and policies
+
+**The authors are not responsible for:**
+- LinkedIn account suspension or bans
+- Inaccurate resume information
+- Unauthorized use of this tool
+- Any damages or losses incurred
+
+---
+
+## 🙏 Acknowledgments
+
+- Built with ❤️ by the community
+- Thanks to all contributors
+- Special thanks to AI providers: OpenAI, Google Gemini, DeepSeek
+
+---
+
+## 📱 Connect With Us
+
+- **GitHub** - [rish0000-dot/Auto-Job-Clicker](https://github.com/rish0000-dot/Auto-Job-Clicker)
+- **Discord** - [Community Server](https://discord.gg/fFp7uUzWCY)
+- **Issues** - [Report or Request](https://github.com/rish0000-dot/Auto-Job-Clicker/issues)
+
+---
+
+<div align="center">
+
+**Made with ❤️ for job seekers everywhere**
+
+⭐ Star this repo if it helped you! ⭐
+
+</div>
